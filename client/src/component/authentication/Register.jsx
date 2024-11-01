@@ -33,7 +33,8 @@ const Register = () => {
           alert(response.data.message)
           return null;
         }
-        localStorage.setItem("UserId", response.data);
+      
+      
           navigate("/");
 }
   return (

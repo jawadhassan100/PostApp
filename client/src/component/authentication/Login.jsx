@@ -30,9 +30,18 @@ async function loginHandler(e) {
           alert(response.data.message)
           return null;
         }        
-		    dispatch(setUserId(response.data.id));
-		    dispatch(setAuthour(response.data.author));
+        const userId = response.data.id
+        const author = response.data.author
+        console.log(userId);
+        console.log(author);
+        
+		    dispatch(setUserId(userId));
+		    dispatch(setAuthour(author));
+        localStorage.setItem("UserId", userId);
+        localStorage.setItem("Author", author);
+
           navigate("/");
+          window.location.reload()
 }
     return (
     <Card className="bg-dark text-white" style={{marginTop:"50px", height:"400px" , width:"400px" ,marginLeft:"460px"}}>

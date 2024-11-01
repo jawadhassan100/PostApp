@@ -1,38 +1,44 @@
-import React from 'react'
-import { Navbar,Container,  NavItem, Button   } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
+import { Navbar, Container, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
+function MyNavbar() {
+  const [isLoggedin, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-function MyNavbar ()  {
-  
-  let userId = localStorage.getItem("UserId")
-  let isLoggedin = false;
-       if(!(userId === "null" )){
-        isLoggedin = true;
-       } else {
-        isLoggedin = false;
-       }
-  // let navigate = useNavigate();
-  function logoutHandler(){
+  useEffect(() => {
+    const userId = localStorage.getItem("UserId");
+    setIsLoggedIn(userId); 
+  }, []);
+
+  function logoutHandler() {
     localStorage.removeItem("UserId");
-    localStorage.setItem("UserId", null);
-    // navigate('/');
+    setIsLoggedIn(false);
+    navigate('/');
+    
   }
+
+  function loginHandler() {
+    navigate('/login');
+   
+  }
+
   return (
     <div>
-       <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand style={{display:"flex", justifyContent:"center", width:"100%"}}>
-            <h2>Post Application</h2>  
+          <Navbar.Brand style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+            <h2>Post Application</h2>
           </Navbar.Brand>
-          {
-            isLoggedin ? ( <NavItem style={{color: 'white'}}  href="#">
-            <Button onClick={logoutHandler}  >Logout</Button >
-          </NavItem >) : <></>
-          }
+          {isLoggedin ? (
+            <Button onClick={logoutHandler}>Logout</Button>
+          ) : (
+            <Button onClick={loginHandler}>Login</Button>
+          )}
         </Container>
       </Navbar>
     </div>
-  )
+  );
 }
 
-export default MyNavbar
+export default MyNavbar;

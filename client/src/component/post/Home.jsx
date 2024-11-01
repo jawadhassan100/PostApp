@@ -10,17 +10,8 @@ import { setData } from "../../redux/post"
 function Home () {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.posts.data)
-   let userId  = useSelector((state) => state.posts.userid)
+   let userId  = localStorage.getItem("UserId")
    let navigate = useNavigate();
-  // console.log(userId === "null")
-   
-
-  // function formateDate(date){
-    // let d = new Date( Date.parse() )
-  //   console.log(d.getFullYear())
-  //   return d.getDate()
-  // }
-
 
      useEffect(() => {
        axios.get("http://localhost:8000/api/Post").then((res) => dispatch(setData(res.data))).catch((e) => console.log(e));

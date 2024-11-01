@@ -16,7 +16,7 @@ postRoute.get("/get/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const posts = await Post.findById(id);
-    console.log(posts);
+    // console.log(posts);
     return res.send(posts);
   } catch (error) {
     res.status(403).json({ message: error });
@@ -33,8 +33,9 @@ postRoute.post("/", async (req, res) => {
   });
   try {
     const posts = await post.save();
-    const Id = post._id;
-    return res.send(Id);
+    console.log(posts);
+    
+    return res.send(posts);
   } catch (error) {
     res.status(403).json({ message: error });
   }
