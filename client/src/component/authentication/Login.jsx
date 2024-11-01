@@ -2,12 +2,18 @@ import React, {useState} from 'react'
 import { Card,Form,Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import { setUserId, setAuthour } from "../../redux/post"
-import { useDispatch} from "react-redux";
+import { setAuthour } from "../../redux/post"
+import { useDispatch, useSelector} from "react-redux";
+import { setUserId } from '../../redux/userId';
 
 const Login = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  const userId = useSelector((state) => state.auth.userId);
+  const author = useSelector((state) => state.posts.author);
+  console.log("slice id" ,userId);
+  console.log("slice author" ,author);
+  
   const dispatch = useDispatch();
   let navigate = useNavigate();
   function emailHandler(e) {
@@ -25,23 +31,17 @@ async function loginHandler(e) {
   console.log(data);
     const response = await axios.post("http://localhost:8000/api/user/login", data, {
         'Content-Type': 'application/json'})
-        console.log(response.data);
+
         if(response.data.message){
           alert(response.data.message)
-          return null;
+          return ;
         }        
         const userId = response.data.id
         const author = response.data.author
-        console.log(userId);
-        console.log(author);
-        
+ 
 		    dispatch(setUserId(userId));
 		    dispatch(setAuthour(author));
-        localStorage.setItem("UserId", userId);
-        localStorage.setItem("Author", author);
-
           navigate("/");
-          window.location.reload()
 }
     return (
     <Card className="bg-dark text-white" style={{marginTop:"50px", height:"400px" , width:"400px" ,marginLeft:"460px"}}>

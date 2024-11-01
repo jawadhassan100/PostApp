@@ -3,9 +3,10 @@ import { Form,Card,Button } from 'react-bootstrap'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const EditPost = () => {
-       let [userid,setUserid] = useState(localStorage.getItem("UserId"))
+      const userid = useSelector((state)=> state.auth.userId)
         let postId = localStorage.getItem("postId");
   useEffect(() => {
        axios.get(`http://localhost:8000/api/user/get/${userid}`).then((res) => setAuthor(res.data)).catch((e) => console.log(e));
@@ -26,10 +27,6 @@ const EditPost = () => {
   
     function contentHandler(event){
     setContent(event.target.value)
-  }
-  
-    function useridHandler(event){
-    setUserid(event.target.value)
   }
   
     function authorHandler(event){
@@ -65,7 +62,7 @@ const EditPost = () => {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>UserId</Form.Label>
-        <Form.Control onInput={useridHandler} type="text" value={userid} disabled/>
+        <Form.Control type="text" value={userid} disabled/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Author</Form.Label>

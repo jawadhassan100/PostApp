@@ -8,23 +8,13 @@ import { useSelector } from 'react-redux'
 function AddPost() {
       let [title ,setTitle] = useState("")
       let [content,setContent] = useState("")
-      let [userid,setUserid] = useState(localStorage.getItem("UserId"))
-      let [author,setAuthor] = useState(localStorage.getItem("Author"))
 
-      const myid = useSelector((state) => state.posts.userid)
-      console.log(myid);
-      
+      const userid = useSelector((state) => state.auth.userId)
       let navigate = useNavigate();
-      // const author = useSelector((state) => state.posts.author)
+      const author = useSelector((state) => state.posts.author)
+      
     function titleHandler(event){
     setTitle(event.target.value)
-  }
-  
-  function useridHandler(event){
-    setUserid(event.target.value)
-  }
-  function authorHandler(event){
-    setAuthor(event.target.value)
   }
   
     function contentHandler(event){
@@ -46,8 +36,6 @@ function AddPost() {
   }
 
 
-
-
   return (
     <>
    
@@ -65,11 +53,11 @@ function AddPost() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>UserId</Form.Label>
-        <Form.Control onInput={useridHandler} type="text" value={userid} disabled/>
+        <Form.Control type="text" value={userid} disabled/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Author</Form.Label>
-        <Form.Control onInput={authorHandler} disabled type="text" value={author}/>
+        <Form.Control  disabled type="text" value={author}/>
       </Form.Group>
       <Button variant="light" type="submit" style={{fontWeight:"bold"}}>
         Submit

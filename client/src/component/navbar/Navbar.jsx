@@ -1,42 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import { Navbar, Container, Button } from 'react-bootstrap';
+import { Navbar, Container, Button, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/userId';
 function MyNavbar() {
-  const [isLoggedin, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userId = localStorage.getItem("UserId");
-    setIsLoggedIn(userId); 
-  }, []);
+    // Get the userId from Redux state
+  const userId = useSelector((state) => state.auth.userId);
+
+  // Check if user is logged in by checking the presence of userId
+  const isLoggedIn = Boolean(userId);
 
   function logoutHandler() {
-    localStorage.removeItem("UserId");
-    setIsLoggedIn(false);
-    navigate('/');
-    
+    dispatch(logout()); // Dispatch the logout action
+    navigate('/'); // Redirect to home page
   }
 
   function loginHandler() {
     navigate('/login');
-   
   }
-
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-            <h2>Post Application</h2>
-          </Navbar.Brand>
-          {isLoggedin ? (
-            <Button onClick={logoutHandler}>Logout</Button>
-          ) : (
-            <Button onClick={loginHandler}>Login</Button>
-          )}
-        </Container>
-      </Navbar>
+      <Navbar bg="dark" variant="dark" expand="md" className="py-3 shadow">
+      <Container>
+        <Navbar.Brand onClick={() => navigate('/')} style={{ cursor: 'pointer', fontSize: '1.5rem', fontWeight: 'bold', color: '#FFD700' }}>
+          Post App
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarResponsive" />
+        <Navbar.Collapse id="navbarResponsive" className="justify-content-end">
+          <Nav>
+            {isLoggedIn ? (
+              <Button variant="outline-light" onClick={logoutHandler} className="mx-2">
+                Logout
+              </Button>
+            ) : (
+              <Button variant="outline-light" onClick={loginHandler} className="mx-2">
+                Login
+              </Button>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
     </div>
   );
 }
