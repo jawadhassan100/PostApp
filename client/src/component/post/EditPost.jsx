@@ -47,8 +47,8 @@ const EditPost = () => {
   }
    return (
     <>
-   
-     <Card className="bg-dark text-white" style={{marginTop:"50px", height:"500px" , width:"400px" ,marginLeft:"460px"}}>
+     <div className='d-grid justify-content-center pb-3'>
+     <Card className="bg-dark text-white" style={{marginTop:"50px", height:"500px" , width:"400px" }}>
       <Card.ImgOverlay>
         <Card.Title style={{marginLeft:"150px", textDecoration:"underline"}}>Edit Post</Card.Title>
         <Form onSubmit={submitHandler}>
@@ -74,6 +74,7 @@ const EditPost = () => {
     </Form>
       </Card.ImgOverlay>
     </Card>
+    </div>
     </>
   )
 }

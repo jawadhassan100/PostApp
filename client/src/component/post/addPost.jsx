@@ -38,8 +38,10 @@ function AddPost() {
 
   return (
     <>
+   <div className='d-grid justify-content-center pb-3'>
+
    
-     <Card className="bg-dark text-white" style={{marginTop:"50px", height:"500px" , width:"400px" ,marginLeft:"460px"}}>
+     <Card className="bg-dark text-white" style={{marginTop:"50px", height:"500px" , width:"400px" }}>
       <Card.ImgOverlay>
         <Card.Title style={{marginLeft:"150px", textDecoration:"underline"}}>Add Post</Card.Title>
         <Form onSubmit={submitHandler}>
@@ -65,6 +67,7 @@ function AddPost() {
     </Form>
       </Card.ImgOverlay>
     </Card>
+    </div>
     </>
   )
 }
