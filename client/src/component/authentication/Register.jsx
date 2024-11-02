@@ -2,7 +2,7 @@ import React ,{useState} from 'react'
 import { Card,Form,Button } from 'react-bootstrap'
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import config from '../config/config';
+import config from '../../config/config';
 const Register = () => {
    let [fullname, setFullName] = useState("");
   let [email, setEmail] = useState("");

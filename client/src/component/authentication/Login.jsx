@@ -5,7 +5,7 @@ import axios from 'axios'
 import { setAuthour } from "../../redux/post"
 import { useDispatch, useSelector} from "react-redux";
 import { setToken, setUserId } from '../../redux/userId';
-import config from '../config/config';
+import config from '../../config/config';
 
 const Login = () => {
   let [email, setEmail] = useState("");

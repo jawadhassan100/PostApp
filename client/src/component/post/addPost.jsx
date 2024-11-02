@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import config from '../config/config'
+import config from '../../config/config'
 
 
 

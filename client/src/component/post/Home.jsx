@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from "../../redux/post";
-import config from '../config/config';
+import config from '../../config/config';
 
 function Home() {
   const dispatch = useDispatch();
