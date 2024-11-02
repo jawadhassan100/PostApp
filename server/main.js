@@ -10,6 +10,11 @@ app.use(cors());
 app.use(express.json());
 const dbUrl = process.env.DATABASE_URL;
 
+// Simple route to check if backend is working
+app.get('/hello', (req, res) => {
+  res.send('Hello World! The backend is running.');
+});
+
 mongoose
   .connect(dbUrl)
   .then(() => {
