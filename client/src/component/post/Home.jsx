@@ -17,7 +17,7 @@ function Home() {
 
   useEffect(() => {
     // Fetch posts and store them in Redux
-    axios.get("http://localhost:8000/api/Post")
+    axios.get("https://post-app-five-alpha.vercel.app/api/Post")
       .then((res) => dispatch(setData(res.data)))
       .catch((e) => console.log(e));
 
@@ -28,7 +28,7 @@ function Home() {
   // Handle delete
   async function deleteHandler(postId) {
     try {
-      await axios.delete(`http://localhost:8000/api/Post/${postId}`);
+      await axios.delete(`https://post-app-five-alpha.vercel.app/api/Post/${postId}`);
     } catch (error) {
       console.error("Error deleting post:", error);
     }

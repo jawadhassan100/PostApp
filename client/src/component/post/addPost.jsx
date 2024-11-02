@@ -29,7 +29,7 @@ function AddPost() {
         UserId:userid,
         Author:author
     }
-    await axios.post("http://localhost:8000/api/post/",data, {
+    await axios.post("https://post-app-five-alpha.vercel.app/api/post/",data, {
         'Content-Type': 'application/json'
     }).then((res) =>
      navigate("/")).catch((e)=>console.log(e))

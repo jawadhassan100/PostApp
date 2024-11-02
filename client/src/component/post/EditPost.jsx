@@ -9,11 +9,11 @@ const EditPost = () => {
       const userid = useSelector((state)=> state.auth.userId)
         let postId = localStorage.getItem("postId");
   useEffect(() => {
-       axios.get(`http://localhost:8000/api/user/get/${userid}`).then((res) => setAuthor(res.data)).catch((e) => console.log(e));
+       axios.get(`https://post-app-five-alpha.vercel.app/api/user/get/${userid}`).then((res) => setAuthor(res.data)).catch((e) => console.log(e));
       }, [userid]);
   useEffect(() => {
    
-    axios.get(`http://localhost:8000/api/Post/get/${postId}`).then((res) => {setTitle(res.data.Title); setContent(res.data.Content)}).catch((e) => console.log(e));
+    axios.get(`https://post-app-five-alpha.vercel.app/api/Post/get/${postId}`).then((res) => {setTitle(res.data.Title); setContent(res.data.Content)}).catch((e) => console.log(e));
 }, [postId]);
         let [title ,setTitle] = useState("")
         let [content,setContent] = useState("")
@@ -35,7 +35,7 @@ const EditPost = () => {
     
  async function submitHandler(e){ 
     e.preventDefault();   
-    await axios.patch(`http://localhost:8000/api/Post/${postId}`, {
+    await axios.patch(`https://post-app-five-alpha.vercel.app/api/Post/${postId}`, {
         Title: title,
         Content:content,
         UserId:userid,

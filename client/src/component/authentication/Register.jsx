@@ -26,7 +26,7 @@ const Register = () => {
     Password: password,
   }
   console.log(data);
-    const response = await axios.post("http://localhost:8000/api/user/register", data, {
+    const response = await axios.post("https://post-app-five-alpha.vercel.app/api/user/register", data, {
         'Content-Type': 'application/json'})
         console.log(response.data);
         if(response.data.message){
