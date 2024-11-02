@@ -28,7 +28,7 @@ function MyNavbar() {
           Post App
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarResponsive" />
-        <Navbar.Collapse id="navbarResponsive" className="justify-content-end">
+        <Navbar.Collapse id="navbarResponsive" className="justify-content-end pt-2">
           <Nav>
             {isLoggedIn ? (
               <Button variant="outline-light" onClick={logoutHandler} className="mx-2">

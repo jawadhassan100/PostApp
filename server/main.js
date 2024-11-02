@@ -7,7 +7,8 @@ const app = express();
 require("dotenv/config");
 
 app.use(cors({
-  origin:"https://post-app-bdmg.vercel.app"
+  origin: "http://localhost:3000",
+  credentials: true
 }));
 app.use(express.json());
 const dbUrl = process.env.DATABASE_URL;

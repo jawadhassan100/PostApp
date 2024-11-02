@@ -2,6 +2,7 @@ import React ,{useState} from 'react'
 import { Card,Form,Button } from 'react-bootstrap'
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import config from '../config/config';
 const Register = () => {
    let [fullname, setFullName] = useState("");
   let [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ const Register = () => {
     Password: password,
   }
   console.log(data);
-    const response = await axios.post("https://post-app-five-alpha.vercel.app/api/user/register", data, {
+    const response = await axios.post(`${config.BASE_URL}/user/register`, data, {
         'Content-Type': 'application/json'})
         console.log(response.data);
         if(response.data.message){
@@ -38,9 +39,10 @@ const Register = () => {
           navigate("/");
 }
   return (
-    <Card className="bg-dark text-white" style={{marginTop:"50px", height:"400px" , width:"400px" ,marginLeft:"460px"}}>
+    <div className='center px-2'>
+    <Card className="bg-dark text-white" style={{marginTop:"50px", height:"400px" , width:"400px" }}>
       <Card.ImgOverlay>
-        <Card.Title style={{marginLeft:"150px", textDecoration:"underline"}}>Register</Card.Title>
+        <Card.Title style={{textAlign:"center",  textDecoration:"underline"}}>Register</Card.Title>
         <Form onSubmit={registerHandler}>
         <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Full Name</Form.Label>
@@ -63,6 +65,7 @@ const Register = () => {
        
       </Card.ImgOverlay>
     </Card>
+    </div>
   )
 }
 

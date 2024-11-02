@@ -4,11 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from "../../redux/post";
+import config from '../config/config';
 
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   // Getting data and userId from Redux
   const data = useSelector((state) => state.posts.data);
   
@@ -17,7 +18,7 @@ function Home() {
 
   useEffect(() => {
     // Fetch posts and store them in Redux
-    axios.get("https://post-app-five-alpha.vercel.app/api/Post")
+    axios.get(`${config.BASE_URL}/post`)
       .then((res) => dispatch(setData(res.data)))
       .catch((e) => console.log(e));
 
@@ -28,7 +29,7 @@ function Home() {
   // Handle delete
   async function deleteHandler(postId) {
     try {
-      await axios.delete(`https://post-app-five-alpha.vercel.app/api/Post/${postId}`);
+      await axios.delete(`${config.BASE_URL}/post/${postId}`);
     } catch (error) {
       console.error("Error deleting post:", error);
     }

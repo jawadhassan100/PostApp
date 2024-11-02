@@ -2,7 +2,9 @@ const { Router } = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../Model/User");
 const userRoute = Router();
+const jwt = require("jsonwebtoken")
 ////----USER----////
+const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
 userRoute.get("/", async (req, res) => {
   try {
@@ -66,11 +68,29 @@ userRoute.post("/login", async (req, res) => {
     if (!verifiedPassword) {
       return res.json({ message: "Password is invalid" });
     }
+
+    // Generate token with user data
+    const token = jwt.sign(
+      { id: user._id, author: user.FullName },
+      JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+
+    // Set token as a secure, HttpOnly cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge: 86400000, // 24 hours in milliseconds
+    });
+
     const userData = {
       id: user._id,
       author: user.FullName,
+      token
     };
-    return res.send(userData);
+
+    return res.status(200).json(userData);
   } catch (error) {
     res.json({ message: error });
   }
